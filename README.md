@@ -7,3 +7,5 @@
       /IBConnectionString"Srvr=""ServName"";Ref=""BaseName""" 
       /RunModeManagedApplication 
       /Execute"\\PathTo\ВыгрузкаЖР2Elastic.epf"
+
+Выложены не все файлы. Добавлю чуть позже.
