@@ -86,6 +86,3 @@ http.port: 9200
 # Require explicit names when deleting indices:
 #
 #action.destructive_requires_name: true
-
-#set default indeses replicas count into 0
-index.number_of_replicas: 0
