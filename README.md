@@ -17,6 +17,7 @@
 Файл маппинга получен из индекса oncjornallog на его основе сделан шаблон(template) для создания
 индексов oncjornalloп* с переопределенным анализатором для некоторых полей, что обеспечивает 
 поиск в формате you-search-as-you-type.
-Статьи:
+
+Статьи, которые помогли:
 https://www.elastic.co/guide/en/elasticsearch/guide/current/_index_time_search_as_you_type.html
 https://tyvik.ru/posts/elasticsearch/
