@@ -1,317 +1,324 @@
-PUT _template/onclogteplate  
+PUT _template/onclogteplate
   {
-    "index_patterns": ["oncjornallo*"],
-    "settings":{
-      "number_of_shards" : 1,
-      "analysis": {
-        "analyzer": {
-          "autocomplete": {
-            "type": "custom",
-            "tokenizer": "standard",
-            "filter": ["lowercase", "autocomplete_filter"]
+    "order" : 0,
+    "index_patterns" : [
+      "oncjornallo*"
+    ],
+    "settings" : {
+      "index" : {
+        "auto_expand_replicas" : "0-1",
+        "number_of_replicas" : "0",
+        "analysis" : {
+          "filter" : {
+            "autocomplete_filter" : {
+              "type" : "edge_ngram",
+              "min_gram" : "2",
+              "max_gram" : "12"
+            }
+          },
+          "analyzer" : {
+            "autocomplete" : {
+              "filter" : [
+                "lowercase",
+                "autocomplete_filter"
+              ],
+              "type" : "custom",
+              "tokenizer" : "standard"
+            }
           }
         },
-        "filter": {
-          "autocomplete_filter": {
-            "type": "edge_ngram",
-            "min_gram": 2,
-            "max_gram": 12
-          }
-        }
+        "number_of_shards" : "1"
       }
     },
     "mappings" : {
-      "doc" : {
-        "properties" : {
-          "@timestamp" : {
-            "type" : "date"
-          },
-          "@version" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
+      "properties" : {
+        "User" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
             }
-          },
-          "ApplicationName" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
+          }
+        },
+        "Port" : {
+          "type" : "long"
+        },
+        "Metadata" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
             }
-          },
-          "ApplicationPresentation" : {
-            "type" : "text",
-            "analyzer" : "autocomplete",
-            "search_analyzer" : "standard",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
+          }
+        },
+        "TransactionStatus" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
             }
-          },
-          "Comment" : {
-            "type" : "text",
-            "analyzer" : "autocomplete",
-            "search_analyzer" : "standard",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
+          }
+        },
+        "TransactionID" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
             }
-          },
-          "Computer" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
+          }
+        },
+        "@version" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
             }
-          },
-          "Connection" : {
-            "type" : "long"
-          },
-          "ConnectionString" : {
-            "type" : "text",
-            "analyzer" : "autocomplete",
-            "search_analyzer" : "standard",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
+          }
+        },
+        "Computer" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
             }
-          },
-          "Data" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
+          }
+        },
+        "host" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
             }
-          },
-          "DataPresentation" : {
-            "type" : "text",
-            "analyzer" : "autocomplete",
-            "search_analyzer" : "standard",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
+          }
+        },
+        "DataPresentation" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
             }
-          },
-          "Date" : {
-            "type" : "date"
-          },
-          "Event" : {
-            "type" : "text",
-            "analyzer" : "autocomplete",
-            "search_analyzer" : "standard",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
+          }
+        },
+        "Comment" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
             }
-          },
-          "EventPresentation" : {
-            "type" : "text",
-            "analyzer" : "autocomplete",
-            "search_analyzer" : "standard",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
-            }
-          },
-          "Level" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
-            }
-          },
-          "Metadata" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
-            }
-          },
-          "MetadataPresentation" : {
-            "type" : "text",
-            "analyzer" : "autocomplete",
-            "search_analyzer" : "standard",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
-            }
-          },
-          "Port" : {
-            "type" : "long"
-          },
-          "ServerName" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
-            }
-          },
-          "Session" : {
-            "type" : "long"
-          },
-          "SyncPort" : {
-            "type" : "long"
-          },
-          "TransactionID" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
-            }
-          },
-          "TransactionStatus" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
-            }
-          },
-          "User" : {
-            "type" : "text",
-            "analyzer" : "autocomplete",
-            "search_analyzer" : "standard",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
-            }
-          },
-          "UserName" : {
-            "type" : "text",
-            "analyzer" : "autocomplete",
-            "search_analyzer" : "standard",
-            "fields" : {
-              "autocomplete" : {
-                "type" : "text",
-                "analyzer" : "autocomplete",
-                "search_analyzer" : "standard"
-              },
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
-              }
-            }
-          },
-          "headers" : {
-            "properties" : {
-              "content_length" : {
-                "type" : "text",
-                "fields" : {
-                  "keyword" : {
-                    "type" : "keyword",
-                    "ignore_above" : 256
-                  }
-                }
-              },
-              "content_type" : {
-                "type" : "text",
-                "fields" : {
-                  "keyword" : {
-                    "type" : "keyword",
-                    "ignore_above" : 256
-                  }
-                }
-              },
-              "http_accept" : {
-                "type" : "text",
-                "fields" : {
-                  "keyword" : {
-                    "type" : "keyword",
-                    "ignore_above" : 256
-                  }
-                }
-              },
-              "http_host" : {
-                "type" : "text",
-                "fields" : {
-                  "keyword" : {
-                    "type" : "keyword",
-                    "ignore_above" : 256
-                  }
-                }
-              },
-              "http_user_agent" : {
-                "type" : "text",
-                "fields" : {
-                  "keyword" : {
-                    "type" : "keyword",
-                    "ignore_above" : 256
-                  }
-                }
-              },
-              "http_version" : {
-                "type" : "text",
-                "fields" : {
-                  "keyword" : {
-                    "type" : "keyword",
-                    "ignore_above" : 256
-                  }
-                }
-              },
-              "request_method" : {
-                "type" : "text",
-                "fields" : {
-                  "keyword" : {
-                    "type" : "keyword",
-                    "ignore_above" : 256
-                  }
-                }
-              },
-              "request_path" : {
-                "type" : "text",
-                "fields" : {
-                  "keyword" : {
-                    "type" : "keyword",
-                    "ignore_above" : 256
-                  }
+          }
+        },
+        "headers" : {
+          "properties" : {
+            "http_accept" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "ignore_above" : 256,
+                  "type" : "keyword"
                 }
               }
-            }
-          },
-          "host" : {
-            "type" : "text",
-            "fields" : {
-              "keyword" : {
-                "type" : "keyword",
-                "ignore_above" : 256
+            },
+            "content_type" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "ignore_above" : 256,
+                  "type" : "keyword"
+                }
+              }
+            },
+            "http_version" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "ignore_above" : 256,
+                  "type" : "keyword"
+                }
+              }
+            },
+            "request_path" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "ignore_above" : 256,
+                  "type" : "keyword"
+                }
+              }
+            },
+            "request_method" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "ignore_above" : 256,
+                  "type" : "keyword"
+                }
+              }
+            },
+            "http_host" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "ignore_above" : 256,
+                  "type" : "keyword"
+                }
+              }
+            },
+            "content_length" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "ignore_above" : 256,
+                  "type" : "keyword"
+                }
+              }
+            },
+            "http_user_agent" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "ignore_above" : 256,
+                  "type" : "keyword"
+                }
               }
             }
           }
+        },
+        "ApplicationName" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "EventPresentation" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "UserName" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "Connection" : {
+          "type" : "long"
+        },
+        "Data" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "Date" : {
+          "type" : "date"
+        },
+        "@timestamp" : {
+          "type" : "date"
+        },
+        "ApplicationPresentation" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "ServerName" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",          
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "Event" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "Level" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "ConnectionString" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "SyncPort" : {
+          "type" : "long"
+        },
+        "MetadataPresentation" : {
+          "search_analyzer" : "standard",
+          "analyzer" : "autocomplete",
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "ignore_above" : 256,
+              "type" : "keyword"
+            }
+          }
+        },
+        "Session" : {
+          "type" : "long"
         }
       }
-    }
-  }
+    },
+    "aliases" : { }
+  },
+  
