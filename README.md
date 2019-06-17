@@ -6,7 +6,7 @@
       /DisableStartupMessages 
       /IBConnectionString"Srvr=""ServName"";Ref=""BaseName""" 
       /RunModeManagedApplication 
-      /Execute"\\PathTo\ВыгрузкаЖР2Elastic.epf"
+      /Execute"\\PathTo\ОбрабткаВыгрузкиЖРдляЗапускаИзКоманднойСтроки.epf"
 
 В выложеной обработке закомментирована выгрузка журнала при открытии формы.
 
